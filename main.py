@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt 
 from logic import find_empty_cell, is_safe
 from sudoku_solver_core import solve_sudoku
 
@@ -52,7 +53,34 @@ print(f"Empty cell at : {empty_pos}")
 is_5_safe = is_safe(initial_board, 5, 0, 2)
 print(" Is 5 safe ? " , is_5_safe)
 
+
 solvable_board = initial_board.copy() # Making a copy to preserve the original board
+
+# Function to Visualize the Solved Board
+def visualize_board(original, solved):
+    fig, ax = plt.subplots(figsize=(8, 8))
+    ax.imshow(solved, cmap='binary', interpolation='nearest') 
+    # Draw grid lines for 3x3 boxes
+    for x in range(0, 10, 3):
+        ax.axhline(x - 0.5, color='black', linewidth=3)
+        ax.axvline(x - 0.5, color='black', linewidth=3)
+        
+    for x in range(0, 10):
+        ax.axhline(x - 0.5, color='gray', linewidth=1)
+        ax.axvline(x - 0.5, color='gray', linewidth=1)
+    for r in range(9):
+        for c in range(9):
+            num = solved[r, c]
+            if num != 0:
+                color = 'black' if original[r, c] != 0 else 'blue'
+                ax.text(c, r, str(num), va='center', ha='center', fontsize=20, color=color)
+
+    ax.set_xticks([])
+    ax.set_yticks([])
+    ax.set_title("Sudoku Solver Visualization", fontsize=16)
+    plt.show()
+if solve_sudoku(solvable_board):
+    visualize_board(initial_board, solvable_board) # Visualize the solved board
 
 # Solving the Sudoku
 if solve_sudoku(solvable_board):
