@@ -1,5 +1,6 @@
 import numpy as np
 from logic import find_empty_cell, is_safe
+from sudoku_solver_core import solve_sudoku
 
 # creating a 9x9 numpy array to represent a Sudoku board
 initial_board = np.array([
@@ -50,3 +51,12 @@ print(f"Empty cell at : {empty_pos}")
 # Test 2: Is placing '5' at (0, 2) safe? (Should be False, as '5' is in row 0)
 is_5_safe = is_safe(initial_board, 5, 0, 2)
 print(" Is 5 safe ? " , is_5_safe)
+
+solvable_board = initial_board.copy() # Making a copy to preserve the original board
+
+# Solving the Sudoku
+if solve_sudoku(solvable_board):
+    print("\nSudoku Solved Successfully!\n")
+    print_board(solvable_board)
+else:
+    print("\nERROR: No solution exists for this Sudoku puzzle.")
