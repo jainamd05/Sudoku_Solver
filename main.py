@@ -1,4 +1,5 @@
 import numpy as np
+from logic import find_empty_cell, is_safe
 
 # creating a 9x9 numpy array to represent a Sudoku board
 initial_board = np.array([
@@ -39,4 +40,13 @@ def print_board(board):
     print("+-------+-------+-------+")
 
 # Trying is it working correctly 
+print("\nFormatted Sudoku Board :")
 print_board(initial_board)
+
+"""Some test cases to check wheter the functions are working correctly or not"""
+# Test 1: Finding an empty cell
+empty_pos = find_empty_cell(initial_board)
+print(f"Empty cell at : {empty_pos}")
+# Test 2: Is placing '5' at (0, 2) safe? (Should be False, as '5' is in row 0)
+is_5_safe = is_safe(initial_board, 5, 0, 2)
+print(" Is 5 safe ? " , is_5_safe)
