@@ -26,4 +26,18 @@ def is_valid_col(board, num, col):
     return True
 
 # TODO 4 : To have Box Validity Check
+
+def is_valid_box(board, num, row, col):
+    # to check that there is only one instance of the number in each cube
+    cube_r = (row // 3) * 3
+    cube_c = (col // 3) * 3
+    
+    # Using NumPy slicing to extract the 3x3 box
+    cube = board[cube_r : ( cube_r + 3 ) , cube_c : ( cube_c + 3 )]
+
+    #  Now to Check if the number is ALREADY in the 3x3 box
+    if num in cube :
+        return False
+    return True
+
 # TODO 5 : To have a function that will check wheter the board is valid or not
